@@ -1,6 +1,6 @@
 
 var test_file = require('./modules/test.js');
-//http://jsfiddle.net/nshX6/7/
+
 
 
 
@@ -9,7 +9,7 @@ var test_file = require('./modules/test.js');
 $(document).ready(function(){
 
     var test = new test_file();
-	test.loadExampleCoordinates();
+	//test.loadExampleCoordinates();
 	
 
 	

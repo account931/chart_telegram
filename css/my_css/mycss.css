@@ -4,8 +4,43 @@
 
 /* CANVAS with chart */
 #graph{
-	width:100%;
+	/*width:60%;*/
+	/*height:400px;*/
 }
+/*
+In most general cases we should avoid using CSS to set the canvas size.
+The default size of canvas is 300 x 150 pixels (bitmap). If you set the size using CSS we'll just end up scaling those 300 x 150 pixels meaning the browser will start interpolating and smoothing the image, which is why you end up with a blurry result.
+*/
+
+/* Tooltip */
+body {
+    background-color: ivory;
+    margin-top:35px;
+}
+#wrapper {
+    position:relative;
+    width:300px;
+    height:150px;
+}
+canvas {
+    border:1px solid red;
+}
+#tip {
+    background-color:white;
+    border:1px solid blue;
+    position:absolute;
+    left:-200px;
+    top:100px;
+}
+
+/* Tooltip */
+
+
+
+
+
+
+
 
 
 
