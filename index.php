@@ -24,6 +24,7 @@
   
   <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script><!-- Tempo for tooltip -->
 
+   <meta name="viewport" content="width=device-width" />
 </head>
 
 <body id="page-top" >
@@ -42,10 +43,10 @@
         <h4><small>Chart Telegram</small></h4>
         <hr>
       
-	    <div class="col-sm-12" id="wrapper">
+	    <div class="col-sm-12" id="wrapper" style="background:;">
 		
-	        <canvas id="graph"  width="600px" height="300px"></canvas> <!-- for charts  300 150-->
-			<canvas id="tip" width="200px" height="50px"></canvas> <!-- For Tooltips  100 25-->
+	        <canvas id="graph"  ></canvas> <!-- for charts  300 150-->
+			<canvas id="tip" ></canvas> <!-- For Tooltips  100 25-->
 	    
 		</div>
 	  
@@ -54,6 +55,10 @@
   </div>
 </div>
 
+
+
+<div class="col-sm-12 for-space">
+</div>
 
 
 <footer class="container-fluid">

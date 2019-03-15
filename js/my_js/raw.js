@@ -4,42 +4,66 @@ $(function(){
 	//canvas.width = window.innerWidth;     // equals window dimension
 //canvas.height = window.innerHeight;
 
- var graph = document.getElementById("graph");
+
+//canvas with chart
+var graph = document.getElementById("graph");
 var ctx = graph.getContext("2d");
+
+//IF NOT IN Mobile, i.e on large screen, use special canvas width recalculation, on mobile left it as was (300x150)
+if(screen.width >= 640){ 
+    graph.width = window.innerWidth - 320; 
+	graph.height = window.innerHeight - 320;
+}
+
+//canvas with tooltips dot
 var tipCanvas = document.getElementById("tip");
 var tipCtx = tipCanvas.getContext("2d");
+
+//$(ctx.canvas).css("width", "80%");
+
 
 var canvasOffset = $("#graph").offset();
 var offsetX = canvasOffset.left;
 var offsetY = canvasOffset.top;
 
 var graph;
-var xPadding = 30;
+var xPadding = 30; //left padding of scales axis
 var yPadding = 30;
 
-// Notice I changed The X values
+
+
+
+// Y is a data values
 var data = {
-    values: [{
-        X: 0,
-        Y: 12
-    }, {
-        X: 2,
-        Y: 28
-    }, {
-        X: 3,
-        Y: 18
-    }, {
+    values: [
+	    {   X: 0,
+            Y: 12,
+		    date: "1 march" }, 
+			
+	    {   X: 2,
+            Y: 28,
+		    date: "2 march"}, 
+	    {
+            X: 3,
+            Y: 18,
+		    date: "3 march"
+        }, 
+		{
         X: 4,
-        Y: 34
+        Y: 34,
+		date: "4 march"
     }, {
         X: 5,
-        Y: 40
+        Y: 40,
+		date: "5 march"
     }, {
         X: 6,
-        Y: 80
+        Y: 80,
+		date: "6 march"
     }, {
         X: 7,
-        Y: 80
+        Y: 80,
+		date: "7 march"
     }]
 };
 
@@ -52,16 +76,20 @@ for (var i = 0; i < data.values.length; i++) {
         r: 4,
         rXr: 16,
         color: "red",
-        tip: "#text" + (i + 1)
+        tip: data.values[i].Y //"#text" + (i + 1)  //Mega error was here //text of tooltip
     });
 }
 
 alert(JSON.stringify(dots, null, 4));
 
+
+
 // request mousemove events
 $("#graph").mousemove(function (e) {
     handleMouseMove(e);
 });
+
+
 
 // show tooltip when mouse hovers over dot
 function handleMouseMove(e) {
@@ -75,16 +103,30 @@ function handleMouseMove(e) {
         var dx = mouseX - dot.x;
         var dy = mouseY - dot.y;
         if (dx * dx + dy * dy < dot.rXr) {
-            tipCanvas.style.left = (dot.x) + "px";
-            tipCanvas.style.top = (dot.y - 40) + "px";
-            tipCtx.clearRect(0, 0, tipCanvas.width, tipCanvas.height);
+			
+			//Mine
+			$("#tip").show(300); //show tooltip, by default in css: display: none. Is made to fix overlaping an empty tooltip
+			
+            tipCanvas.style.left = (dot.x) + "px"; //tooltip margin left
+            tipCanvas.style.top = (dot.y - 40) + "px";  //tooltip margin bottom
+            tipCtx.clearRect(0, 0, tipCanvas.width, tipCanvas.height ); //clearRect(marginLeft, width, height)
             //                  tipCtx.rect(0,0,tipCanvas.width,tipCanvas.height);
-            tipCtx.fillText($(dot.tip).val(), 5, 15);
+			
+			//in mobile only
+			if(screen.width <= 640){ 
+			    tipCtx.font = "90px Arial"; //set font size
+				tipCtx.fillText(/*$(dot.tip).val()*/dot.tip, 25, 85); //(text, paddingLeft, paddingTop)
+			} else {
+				//tipCtx.font = "20px Arial"; //set font size
+                tipCtx.fillText(/*$(dot.tip).val()*/dot.tip, 5, 15); //(text, paddingLeft, paddingTop)
+			}
             hit = true;
-        }
+        } /*else {
+			$("#tip").hide(800);
+		}*/
     }
     if (!hit) {
-        tipCanvas.style.left = "-200px";
+        tipCanvas.style.left = "-1000px";  //was 200px, this solution fixes bug when tooltip appears in left empty if not mouse overed
     }
 }
 
@@ -136,7 +178,7 @@ function getYPixel(val) {
 graph = document.getElementById("graph");
 var c = graph.getContext('2d');
 
-c.lineWidth = 2;
+c.lineWidth = 2; //width of XY axis scale
 c.strokeStyle = '#333';
 c.font = 'italic 8pt sans-serif';
 c.textAlign = "center";
@@ -148,20 +190,22 @@ c.lineTo(xPadding, graph.height - yPadding);
 c.lineTo(graph.width, graph.height - yPadding);
 c.stroke();
 
-// Draw the X value texts
+
+
+
+
+
+// Draw the X value texts, draw text values in horizont axis!!!!!!
 var myMaxX = getMaxX();
 for (var i = 0; i <= myMaxX; i++) {
     // uses data.values[i].X
-    c.fillText(i, getXPixel(i), graph.height - yPadding + 20);
+    c.fillText(i/*data.values[i].date*/, getXPixel(i), graph.height - yPadding + 20);
 }
-/* was
-            for(var i = 0; i < data.values.length; i ++) {
-                // uses data.values[i].X
-                c.fillText(data.values[i].X, getXPixel(data.values[i].X), graph.height - yPadding + 20);
-            }
-            */
 
-// Draw the Y value texts
+
+
+
+// Draw the Y value texts, text in vertical axis
 c.textAlign = "right"
 c.textBaseline = "middle";
 
@@ -171,20 +215,53 @@ for (var i = 0; i < getMaxY(); i += 10) {
 
 c.strokeStyle = '#f00';
 
-// Draw the line graph
+
+
+// Draw the line graph--------------------------------------------------------------------------------
+/*
+function drawChart(i){
+	c.lineTo(getXPixel(data.values[i].X), getYPixel(data.values[i].Y)); 
+	c.stroke();
+}
+
+function getDrawer(i) {
+    return function() {
+        drawChart(i);
+    }
+}
+*/
+
+
 c.beginPath();
 c.moveTo(getXPixel(data.values[0].X), getYPixel(data.values[0].Y));
 for (var i = 1; i < data.values.length; i++) {
-    c.lineTo(getXPixel(data.values[i].X), getYPixel(data.values[i].Y));
+	//setTimeout(function() {
+		c.lineTo(getXPixel(data.values[i].X), getYPixel(data.values[i].Y)); 
+		//drawChart();
+		//setTimeout(getDrawer(i), 1000);
+		 //setTimeout(getDrawer(i), 1000);
+		
+	//}, 2000);
+   //c.lineTo(getXPixel(data.values[i].X), getYPixel(data.values[i].Y));
 }
 c.stroke();
+
+
+
+
+
+
+
+
+
+
 
 // Draw the dots
 c.fillStyle = '#333';
 
 for (var i = 0; i < data.values.length; i++) {
     c.beginPath();
-    c.arc(getXPixel(data.values[i].X), getYPixel(data.values[i].Y), 4, 0, Math.PI * 2, true);
+    c.arc(getXPixel(data.values[i].X), getYPixel(data.values[i].Y), 8/*Radius*/, 0, Math.PI * 2, true);
     c.fill();
 }
 });         

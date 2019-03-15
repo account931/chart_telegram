@@ -1,4 +1,5 @@
-# Application that makes 
+# Application to create manually charts.
+
 How it works:
 1. Main (and the only) entry JS script is js/my_js/dist/js/bundle_js.js
 

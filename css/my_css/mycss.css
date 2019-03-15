@@ -12,18 +12,22 @@ In most general cases we should avoid using CSS to set the canvas size.
 The default size of canvas is 300 x 150 pixels (bitmap). If you set the size using CSS we'll just end up scaling those 300 x 150 pixels meaning the browser will start interpolating and smoothing the image, which is why you end up with a blurry result.
 */
 
-/* Tooltip */
+
+
+/* Tooltip CSS*/
 body {
     background-color: ivory;
     margin-top:35px;
 }
 #wrapper {
+	/*
     position:relative;
     width:300px;
-    height:150px;
+    height:150px; */
+	overflow-x: scroll; /* enable horiz scroll */
 }
 canvas {
-    border:1px solid red;
+    border:1px solid red; 
 }
 #tip {
     background-color:white;
@@ -31,12 +35,23 @@ canvas {
     position:absolute;
     left:-200px;
     top:100px;
+	display:none; /* mine-> tooltip is invisible by default, made to fix overlapping */
+	border-radius: 8px;
+	
+
 }
 
-/* Tooltip */
+/* ---------------------------------------- Mobile */
+@media screen and (max-width: 480px) { 
+  #tip {width:20%; font-size:22px;}
+}
 
+/* END Tooltip CSS*/
 
+/* just empty div for not footer overlap the canvas */
+.for-space{height:350px;}
 
+footer{text-align:center;}
 
 
 
