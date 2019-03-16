@@ -14,12 +14,14 @@ The default size of canvas is 300 x 150 pixels (bitmap). If you set the size usi
 
 
 
-/* Tooltip CSS*/
+/* ----------------------------------------------- Tooltip CSS --------------------------------------------------------- */
 body {
     background-color: ivory;
     margin-top:35px;
 }
-#wrapper {
+#wrapper { 
+    overflow:visible;
+	
 	/*
     position:relative;
     width:300px;
@@ -29,24 +31,33 @@ body {
 canvas {
     border:1px solid red; 
 }
-#tip {
-    background-color:white;
+
+#tip { /* tooltip itself */
+    background-color:yellow;
     border:1px solid blue;
     position:absolute;
     left:-200px;
     top:100px;
 	display:none; /* mine-> tooltip is invisible by default, made to fix overlapping */
 	border-radius: 8px;
+	/*overflow:visible;
+	word-wrap:break-word;
+	z-index: 13;*/
 	
 
 }
 
-/* ---------------------------------------- Mobile */
+/* --------------------- Mobile */
 @media screen and (max-width: 480px) { 
-  #tip {width:20%; font-size:22px;}
+  #tip {width:20%; font-size:22px;
+      margin-top:30px;/* to fix tooltip overlapping in mobile */
+  }
 }
 
-/* END Tooltip CSS*/
+/* ------------------------------------------ END Tooltip CSS ------------------------------------------------------------- */
+
+
+
 
 /* just empty div for not footer overlap the canvas */
 .for-space{height:350px;}
