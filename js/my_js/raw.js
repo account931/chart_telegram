@@ -86,7 +86,8 @@ for (var i = 0; i < json.values.length; i++) {
         r: 4,
         rXr: 16,
         color: "red",
-        tip: json.values[i].Y //"#text" + (i + 1)  //Mega error was here //text of tooltip
+        tip: json.values[i].Y,  //"#text" + (i + 1)  //Mega error was here //text of tooltip,
+		dateZ: json.values[i].date
     });
 }
 
@@ -122,13 +123,14 @@ function handleMouseMove(e) {
             tipCtx.clearRect(0, 0, tipCanvas.width, tipCanvas.height ); //clearRect(marginLeft, width, height)
             //                  tipCtx.rect(0,0,tipCanvas.width,tipCanvas.height);
 			
+			var toolTipText = dot.tip + "/" + dot.dateZ;
 			//in mobile only
 			if(screen.width <= 640){ 
 			    tipCtx.font = "90px Arial"; //set font size
-				tipCtx.fillText(/*$(dot.tip).val()*/dot.tip, 25, 85); //(text, paddingLeft, paddingTop)
+				tipCtx.fillText(/*$(dot.tip).val()*/toolTipText, 25, 85); //(text, paddingLeft, paddingTop)
 			} else {
 				//tipCtx.font = "20px Arial"; //set font size
-                tipCtx.fillText(/*$(dot.tip).val()*/dot.tip, 5, 15); //(text, paddingLeft, paddingTop)
+                tipCtx.fillText(/*$(dot.tip).val()*/toolTipText, 5, 15); //(text, paddingLeft, paddingTop)
 			}
             hit = true;
         } /*else {
@@ -206,10 +208,10 @@ c.stroke();
 
 
 // Draw the X value texts, draw text values in horizont axis!!!!!!
-var myMaxX = getMaxX();
-for (var i = 0; i <= myMaxX -1; i++) { //was originally (var i = 0; i <= myMaxX; i++), use -1 strictly for cases with dates
+var maxXValue = getMaxX();
+for (var i = 0; i <= maxXValue -1; i++) { //was originally (var i = 0; i <= maxXValue; i++), use -1 strictly for cases with dates
     // uses json.values[i].X
-    c.fillText(/*i*/json.values[i].date, getXPixel(i), graph.height - yPadding + 20);
+    c.fillText(/*i*/json.values[i].date , getXPixel(i), graph.height - yPadding + 20);
 }
 
 
