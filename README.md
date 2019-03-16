@@ -6,7 +6,13 @@ How it works:
 
 
 
-
+========================================================
+Mega Errors(fixed):
+1.LineTo() method used inside for(var i = 0; i < var.length){ setTimeout(), 1000); caused wrong iteration counting(it jumped at once to last iteration). 
+Fixed by (shooter army) example.
+2.LineTo() method used inside for(var i = 0; i < var.length){ setTimeout(), 1000); causes in 1st iteration drawing a line from last point to 1st.
+Fixed by setting the start position(c.moveTo) inside for loop in the very first iteration, all other iterations starting from 2nd, draw lines with {c.lineTo}
+3.Cut overlapped tooltips in mobile version. Fixed by different css query styles for desktop/mobile(adding margin in mobile.)
 
 =========================================================
 BROWSERIFY, for more details see {account931/git-browserify-yii_commands_manuals/npm_browserify_commands.txt}

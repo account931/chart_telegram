@@ -257,13 +257,16 @@ for (var i = 0; i < json.values.length; i++) { // was i=1
 	     setTimeout(function() {
 	         
 			 //Mega Fix, sets the path to start position, out of for loop it was not working
+			 //sets the path to start position in a very first iteration 
 			 if(ix == 0 ){
 				 c.moveTo(getXPixel(json.values[0].X), getYPixel(json.values[0].Y));
 			 }
 			 
 			 
 	         //alert(ix);
-		     //alert(json.values[i].X + "  and " +  json.values[i].Y + " i->" + i);
+		     //alert(json.values[ix].X + "  and " +  json.values[ix].Y + " i->" + ix);
+			 
+			 //all other iterations starting from 2nd, draw lines with {c.lineTo}
 		     c.lineTo(getXPixel(json.values[ix].X), getYPixel(json.values[ix].Y)); 
 		     c.stroke(); //stroke() method to actually draw the path on the canvas.
 		     //c.clearRect(0,0,graph.width,graph.height);
