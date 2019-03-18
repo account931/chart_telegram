@@ -385,20 +385,20 @@ alert("json.values.length;" + json.length);
 
 for (var i = 0; i < json.length; i++) { // was i=1
 
-//(function(iZ) {  //shooters, or u can just use {let i = 1} in loop instead of shooters
+(function(iZ) {  //shooters, or u can just use {let i = 1} in loop instead of shooters
 //alert("iZ-> " + iZ);
-    
-    for (var j = 0; j < json[i].column.length; j++) {
-	    (function(ix, p) {  //shooters, or u can just use {let i = 1} in loop instead of shooters //ix is {i}, p is {j} //SHOOTER is a must otherwise it jumps to last i at once
-	         setTimeout(function() {
+   setTimeout(function() {  
+    for (var j = 0; j < json[iZ].column.length; j++) {
+	    (function(ix) {  //shooters, or u can just use {let i = 1} in loop instead of shooters //ix is {i}, p is {j} //SHOOTER is a must otherwise it jumps to last i at once
+	         //setTimeout(function() {
 	         
 			     //alert("ix-> " + ix + " j-> " + p);
 			 
 			     //Mega Fix, sets the path to start position, out of for loop it was not working
 			     //sets the path to start position in a very first iteration 
-			     if(p == 0 ){ 
+			     if(ix == 0 ){ 
 					 c.beginPath(); //mega fix to draw different colors lines
-				     c.moveTo(getXPixel(json[ix].column[0].X), getYPixel(json[ix].column[0].Y));
+				     c.moveTo(getXPixel(json[iZ].column[0].X), getYPixel(json[iZ].column[0].Y));
 			     }
 			 
 			 
@@ -407,8 +407,8 @@ for (var i = 0; i < json.length; i++) { // was i=1
 			 
 			     //all other iterations starting from 2nd, draw lines with {c.lineTo}
 				 
-		         c.lineTo(getXPixel(json[ix].column[p].X), getYPixel(json[ix].column[p].Y)); 
-				 c.strokeStyle = json[ix].color ;
+		         c.lineTo(getXPixel(json[iZ].column[ix].X), getYPixel(json[iZ].column[ix].Y)); 
+				 c.strokeStyle = json[iZ].color ;
 				 
 		         c.stroke(); //stroke() method to actually draw the path on the canvas.
 				 
@@ -420,13 +420,15 @@ for (var i = 0; i < json.length; i++) { // was i=1
 			 
 			     //timeX = ix * p;
 			 
-	        }, /*ix*/1 * 500);
-	    })(i, j); // end shooters 
+	        //}, ix * 500);
+	    })(j); // end shooters 
 
 
    //c.lineTo(getXPixel(json.values[i].X), getYPixel(json.values[i].Y));
 }
-//})(i); // end shooters 
+}, iZ * 500);
+})(i); // end shooters 
+
 }
 //c.stroke();
 // **                                                                                  **
