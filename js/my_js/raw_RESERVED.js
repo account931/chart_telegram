@@ -44,7 +44,6 @@ var yPadding = 30;
 
 
 // Y is a json values
-/*
 var json = {
     values: [
 	    { X: 0,
@@ -77,87 +76,22 @@ var json = {
 		date: "7.03"
     }]
 };
-*/
-//structure var json = [ {chart1}, {chart2}];
-var json = [
-    { //chart 1
-      column: [  {X: 0,Y: 12, date: "1.03"}, {X: 2,Y: 28, date: "2.03"}, {X: 3,Y: 18, date: "3.03"}, {X: 4,Y: 34, date: "4.03"}, {X: 5,Y: 40, date: "5.03"}, {X: 6,Y: 80, date: "6.03"}, {X: 7,Y: 80}],
-	  type: 'line',
-	  color: '',
-	  name: 'nameX'
-	},
-	
-	{ //chart 2
-      column: [  {X: 0,Y: 6, date: "1.03"}, {X: 2,Y: 14, date: "2.03"}, {X: 3,Y: 9, date: "3.03"}, {X: 4,Y: 17, date: "4.03"}, {X: 5,Y: 20, date: "5.03"}, {X: 6,Y: 40, date: "6.03"}, {X: 7,Y:40}],
-	  type: 'line',
-	  color: '',
-	  name: 'nameX2'
-	},
-	
-	
-];
 
-
-
-
-//alert(json[0].column.length);
-
-// define tooltips for each json point //adding to array dots
+// define tooltips for each json point
 var dots = [];
-
-/*
-//it works, just it creates an array with 12 objects(json[i].column.length), while we need only 2 {json.length}
-for (var i = 0; i < json.length; i++) {
-	for (var j = 0; j < json[i].column.length; j++) {
-      dots.push({
-        x: getXPixel(json[i].column[j].X),
-        y: getYPixel(json[i].column[j].Y),
+for (var i = 0; i < json.values.length; i++) {
+    dots.push({
+        x: getXPixel(json.values[i].X),
+        y: getYPixel(json.values[i].Y),
         r: 4,
         rXr: 16,
         color: "red",
-        tip: json[i].column[j].Y,  //"#text" + (i + 1)  //Mega error was here //text of tooltip,
-		dateZ: json[i].column[j].date
+        tip: json.values[i].Y,  //"#text" + (i + 1)  //Mega error was here //text of tooltip,
+		dateZ: json.values[i].date
     });
-	}
-}
-*/
-
-
-//define tooltips for each json point //adding to array dots
-for (var i = 0; i < json.length; i++) {
-    var temp_dots = {}; //creats temp object
-    temp_dots.color = "red";
-	temp_dots.r = 4;
-	temp_dots.rXr = 16;
-	temp_dots.column = []; //creates temp array column[] in object temp_dots
-		
-	for (var j = 0; j < json[i].column.length; j++) { //iterates over column length
-		var b = {}; //creats tem object which will contain x,y coord
-		b.x = json[i].column[j].X;
-		b.y = json[i].column[j].Y;	
-		b.dateZ = json[i].column[j].date;
-		b.tip = json[i].column[j].Y;
-		temp_dots.column.push(b); //adding temp created object {x:3, y:6} to array temp_dots
-	}
-	
-	//dots push
-	dots.push(JSON.stringify(temp_dots));
 }
 
-
-
-
-
-
-alert("dots" + JSON.stringify(dots, null, 4));
-console.log(dots);
-
-
-
-
-
-
-
+alert(JSON.stringify(dots, null, 4));
 
 
 
@@ -168,7 +102,7 @@ $("#graph").mousemove(function (e) {
 
 
 
-// show tooltip when mouse hovers over dot  //NOT DONE!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+// show tooltip when mouse hovers over dot
 function handleMouseMove(e) {
     mouseX = parseInt(e.clientX - offsetX);
     mouseY = parseInt(e.clientY - offsetY);
@@ -216,57 +150,36 @@ function handleMouseMove(e) {
 }
 
 
-
-
-
-
 // unchanged code follows
 
-// Returns the max Y value in our json list,in any of chart object(chart1, chart2....)  
+// Returns the max Y value in our json list
 function getMaxY() {
     var max = 0;
-    for (var i = 0; i < json.length; i++) {
-	    for (var j = 0; j < json[i].column.length; j++) {
-            if (json[i].column[j].Y > max) {
-                max = json[i].column[j].Y;
-            }
-	    }
+
+    for (var i = 0; i < json.values.length; i++) {
+        if (json.values[i].Y > max) {
+            max = json.values[i].Y;
+        }
     }
-	//alert("max-> " + max);
+
     max += 10 - max % 10;
     return max;
 }
 
-
-
-
-
-
-// Returns the max X value in our json list!
+// Returns the max X value in our json list
 function getMaxX() {
     var max = 0;
-    for (var i = 0; i < json.length; i++) {
-		for (var j = 0; j < json[i].column.length; j++) {
-            if (json[i].column[j].X > max) {
-                max = json[i].column[j].X;
-            }
+
+    for (var i = 0; i < json.values.length; i++) {
+        if (json.values[i].X > max) {
+            max = json.values[i].X;
         }
-	}
+    }
+
     // omited
     //max += 10 - max % 10;
-	//alert("max " + max)
     return max;
 }
-
-//getMaxX();  //test only
-
-
-
-
-
-
- 
- 
 
 // Return the x pixel for a graph point
 function getXPixel(val) {
@@ -305,7 +218,7 @@ c.stroke();
 var maxXValue = getMaxX();
 for (var i = 0; i <= maxXValue -1; i++) { //was originally (var i = 0; i <= maxXValue; i++), use -1 strictly for cases with dates
     // uses json.values[i].X
-    c.fillText(i /*json.values[i].date*/ , getXPixel(i), graph.height - yPadding + 20);
+    c.fillText(/*i*/json.values[i].date , getXPixel(i), graph.height - yPadding + 20);
 }
 
 
@@ -322,22 +235,6 @@ for (var i = 0; i < getMaxY(); i += 10) {
 c.strokeStyle = '#f00';
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-//STOPPED HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
- 
- 
 
 // Draw the CHART graph Lines------------------------------------------------------------
 // **************************************************************************************
@@ -359,19 +256,17 @@ function getDrawer(i) {
 
 c.beginPath();
 //c.moveTo(getXPixel(json.values[0].X), getYPixel(json.values[0].Y)); //moveTo() method moves the path to the specified point in the canvas, without creating a line.
-alert("json.values.length;" + json.length);
+alert("json.values.length;" + json.values.length);
 //c.lineTo(getXPixel(2), getYPixel(28));c.stroke();
 
-for (var i = 0; i < json.length; i++) { // was i=1
-
-for (var j = 0; j < json[i].column.length; j++) {
+for (var i = 0; i < json.values.length; i++) { // was i=1
 	(function(ix) {  //shooters, or u can just use {let i = 1} in loop instead of shooters
 	     setTimeout(function() {
 	         
 			 //Mega Fix, sets the path to start position, out of for loop it was not working
 			 //sets the path to start position in a very first iteration 
 			 if(ix == 0 ){
-				 c.moveTo(getXPixel(json[i].column[0].X), getYPixel(json[i].column[0].X));
+				 c.moveTo(getXPixel(json.values[0].X), getYPixel(json.values[0].Y));
 			 }
 			 
 			 
@@ -379,7 +274,7 @@ for (var j = 0; j < json[i].column.length; j++) {
 		     //alert(json.values[ix].X + "  and " +  json.values[ix].Y + " i->" + ix);
 			 
 			 //all other iterations starting from 2nd, draw lines with {c.lineTo}
-		     c.lineTo(getXPixel(json[ix].column[j].X), getYPixel(json[ix].column[j].X)); 
+		     c.lineTo(getXPixel(json.values[ix].X), getYPixel(json.values[ix].Y)); 
 		     c.stroke(); //stroke() method to actually draw the path on the canvas.
 		     //c.clearRect(0,0,graph.width,graph.height);
 		     //drawChart();
@@ -390,7 +285,6 @@ for (var j = 0; j < json[i].column.length; j++) {
 	     }, ix * 500);
 	})(i); // end shooters 
    //c.lineTo(getXPixel(json.values[i].X), getYPixel(json.values[i].Y));
-}
 }
 //c.stroke();
 // **                                                                                  **

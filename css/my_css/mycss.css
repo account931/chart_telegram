@@ -33,7 +33,7 @@ canvas {
 }
 
 #tip { /* tooltip itself */
-    background-color:yellow;
+    background-color:white;
     border:1px solid blue;
     position:absolute;
     left:-200px;
