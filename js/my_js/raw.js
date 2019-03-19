@@ -83,14 +83,14 @@ var json = {
 //structure var json = [ {chart1}, {chart2}];
 var json = [
     { //chart 1
-      column: [  {X: 0,Y: 12, date: 1551398400000 /*i.e 1.03.2019*/}, {X: 2,Y: 28, date: 1551484800}, {X: 3,Y: 68, date: 1551571200}, {X: 4,Y: 34, date: 1551657600}, {X: 5,Y: 40, date: 1551744000/*5.03.19*/}, {X: 6,Y: 80, date: 1551830400}, {X: 7,Y: 69, date: 1551916800}],
+      column: [  {X: 0,Y: 12, date: 1551398400 /*i.e 1.03.2019*/}, {X: 2,Y: 28, date: 1551484800}, {X: 3,Y: 68, date: 1551571200}, {X: 4,Y: 34, date: 1551657600}, {X: 5,Y: 40, date: 1551744000/*5.03.19*/}, {X: 6,Y: 80, date: 1551830400}, {X: 7,Y: 69, date: 1551916800}],
 	  type: 'line',
 	  color: '#ff0000',  //red
 	  name: 'nameX'
 	},
 	
 	{ //chart 2
-      column: [  {X: 0,Y: 4, date: 1551398400000 /*i.e 1.03.2019*/}, {X: 2,Y: 7, date: 1551484800}, {X: 3,Y: 18, date: 1551571200}, {X: 4,Y: 17, date: 1551657600}, {X: 5,Y: 20, date: 1551744000/*5.03.19*/}, {X: 6,Y: 40, date: 1551830400}, {X: 7,Y:40, date: 1551916800}],
+      column: [  {X: 0,Y: 4, date: 1551398400 /*i.e 1.03.2019*/}, {X: 2,Y: 7, date: 1551484800}, {X: 3,Y: 18, date: 1551571200}, {X: 4,Y: 17, date: 1551657600}, {X: 5,Y: 20, date: 1551744000/*5.03.19*/}, {X: 6,Y: 40, date: 1551830400}, {X: 7,Y:40, date: 1551916800}],
 	  type: 'line',
 	  color: '#ffe000',  //yellow
 	  name: 'nameX2'
@@ -258,7 +258,7 @@ function handleMouseMove(e) {
 
     // Put your mousemove stuff here
     var hit = false;
-    for (var i = 0; i < dots.length; i++) {
+    for (var i = 0; i < dots.length; i++) { //alert(dots.length);
         var dot = dots[i];
         var dx = mouseX - dot.x;
         var dy = mouseY - dot.y;
@@ -273,7 +273,8 @@ function handleMouseMove(e) {
             //                  tipCtx.rect(0,0,tipCanvas.width,tipCanvas.height);
 			
 			//define tooltip text
-			var toolTipText_date = dateStamp_to_Date( dots[i].dateZ) ; //converts dateUnix to normal
+			var toolTipText_date = funct_convert_dateStamp(dots[i].dateZ) ; //converts dateUnix to normal
+			//alert(toolTipText_date);
             var toolTipText_text = dots[i].tip + " " + dots[i].status ;  //defines tip + status, i.e "40 Left"
             if(dots[i].status == "Joined"){
 				textColor = "green";
@@ -562,21 +563,23 @@ c.fillText("Followers", 130, 20);
 
 
 //converts Unix to normal
-function dateStamp_to_Date(dateStamp)
+function funct_convert_dateStamp(dateStampp)
 {
   var weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'];
   var monthList = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   
-  var dateTime = new Date(dateStamp);
+  var dateTime =  new Date(dateStampp*1000);//Mega Error, must be {dateStampp*1000}, was without *1000
   var curr_date = dateTime.getDate(); //gets the date
   var curr_month = dateTime.getMonth();// gets month //+ 1;  
   var curr_year = dateTime.getFullYear();
   var dayOfWeek = weekdays[dateTime.getDay()]; //day of the week
   var n = dayOfWeek + ", " + monthList[curr_month] + " " + curr_date/* + "-" + curr_year*/;
+  
+
   return n;
 }
 
-//alert(dateStamp_to_Date(json[0].column[0].date));
+//alert(funct_convert_dateStamp(1551398400));
 
 
 });         
