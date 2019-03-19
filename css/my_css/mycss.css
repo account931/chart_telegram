@@ -20,19 +20,21 @@ body {
     margin-top:35px;
 }
 #wrapper { 
-    overflow:visible;
+    
 	
 	/*
+	overflow:visible;
     position:relative;
     width:300px;
-    height:150px; */
-	overflow-x: scroll; /* enable horiz scroll */
+    height:150px; 
+	overflow-x: scroll; */  /* enable horiz scroll */
 }
 canvas {
-    border:1px solid red; 
+    /*border:1px solid red; */
 }
 
-#tip { /* tooltip itself */
+#tip { /* tooltip itself, font-size is set in js with { tipCtx.font = "60px Arial";}*/
+    width:11%;
     background-color:white;
     border:1px solid blue;
     position:absolute;
@@ -57,12 +59,34 @@ canvas {
 /* ------------------------------------------ END Tooltip CSS ------------------------------------------------------------- */
 
 
+.myShadow{
+    box-shadow: 10px 10px 5px grey;
+	margin-top:20px;
+}
 
+.textShadow {
+	color: transparent;
+    background: #666666;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    text-shadow: 0px 3px 3px rgba(255,255,255,0.5); }/* Shadow params */
 
 /* just empty div for not footer overlap the canvas */
 .for-space{height:350px;}
 
+.round{margin-top:20px;}
+.round button {border-radius:18px; width:99px;}
+
+
 footer{text-align:center;}
+
+
+
+
+
+
+
 
 
 

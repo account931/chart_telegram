@@ -1,4 +1,4 @@
-
+//this is fully working code for creating 1-line(single) chart with hoverable tooltips
 $(function(){
 	
 	//canvas.width = window.innerWidth;     // equals window dimension
