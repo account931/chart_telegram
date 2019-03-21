@@ -532,7 +532,7 @@ for (var i = 0; i < json.length; i++) { // was i=1
 
 
 
-// Draw the hoverable tooltips
+// Draw the hoverable dots, if u hover over them-> tooltip will appear
 // **************************************************************************************
 // **************************************************************************************
 //                                                                                     **
@@ -564,7 +564,7 @@ c.fillText("Followers", 130, 20);
 
 
 //converts Unix to normal. To use one same function we use the 2nd arg {tag}, if it is set in calling function, function returns short date, i.e {1.03}
-function funct_convert_dateStamp(dateStampp, tag) //arg(UnixStamp, )
+function funct_convert_dateStamp(dateStampp, tag) //arg(UnixStamp, true/false)
 {
   var n;
   var weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'];

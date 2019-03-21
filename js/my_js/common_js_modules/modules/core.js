@@ -1,4 +1,11 @@
-var toolTip_file = require('./creates_tooltip_array_from_json.js');
+var toolTip_file = require('./creates_tooltip_array_from_json.js'); // define tooltips for each json point //adding to array tooltips
+var drawAxis_file = require('./draw_Vert_Horiz_Axis.js');  //draw horizontal and vertical Axis
+var drawXValues_file = require('./draw_X_values_text.js');  //Draw the X value texts, draw text values in horizont axis!!!!!!
+var drawYValues_vertical_file = require('./draw_Y_values_vertical.js');  //Draw the X value texts, draw text values in vertical axis!!!!!!
+var drawChartLines_file = require('./draw_chartLines.js');  //draw chart lines 
+var addDots_file = require('./addHoverable_Dots.js');  //draw hoverable dots, if u hover over them-> tooltip will appear
+var showTooltips_file = require('./showTooltip_onMouseOver.js');  //show Tooltips onMouseOver
+var switchNightDay_file = require('./switchDayNightMode.js');  //switchDayNightMode
 
 
 function core(){
@@ -26,7 +33,7 @@ function core(){
 	
   this.createChart = function(){
 	  
-	var json; 
+	var json, c, offsetX, offsetY, tipCanvas_2,tipCtx; //EXPORTS
 	exports.json = this.json; //exports json array (i.e to getMaxX Module)
   
   
@@ -34,7 +41,7 @@ function core(){
 	  //alert(this.json[0].names);
 	  //canvas with chart
       var graph = document.getElementById("graph");
-      var c = graph.getContext("2d");
+      exports.c = graph.getContext("2d"); //EXPORT VARIABLE (i.e to {draw_Vert_Horiz_Axis} Module)
 
       //IF NOT IN Mobile, i.e on large screen, use special canvas width recalculation, on mobile left it as was (300x150).
       //U may not use it, but on desktop canvas chart will be too small, only 300x150
@@ -47,24 +54,68 @@ function core(){
 
       //canvas with tooltips dot
       var tipCanvas = document.getElementById("tip");
-      var tipCtx = tipCanvas.getContext("2d");
+      exports.tipCtx = tipCanvas.getContext("2d"); //EXPORT VARIABLE (i.e to {showTooltip_onMouseOver} Module)
 	  
-	  var canvasOffset = $("#graph").offset();
-      var offsetX = canvasOffset.left;
-      var offsetY = canvasOffset.top;
+	  var canvasOffset = $("#graph").offset(); 
+	  
+      exports.offsetX = canvasOffset.left; //EXPORT VARIABLE (i.e to {showTooltip_onMouseOver} Module)
+      exports.offsetY = canvasOffset.top;  //EXPORT VARIABLE (i.e to {showTooltip_onMouseOver} Module)
+	  exports.tipCanvas_2 = tipCanvas;     //EXPORT VARIABLE (i.e to {showTooltip_onMouseOver} Module)
 
       var graph;
 	  //var xPadding;
       exports.xPadding = 30; //left padding of scales axis  //EXPORT VARIABLE (i.e to {getXPixel} Module)
       /*var*/ exports.yPadding = 30; //EXPORT VARIABLE (i.e to {getYPixel} Module)
 	  
-	  //MODULES Part
+	  
+	  
+	  
+	  //MODULES Part----------
+     // **************************************************************************************
+     // **************************************************************************************
+     //                                                                                     **  
+	  
 	  // define tooltips for each json point //adding to array tooltips
 	  var createTooltipArray = new toolTip_file();
-	  createTooltipArray.createArray(this.json);
-	  
-	  //console.log(tooltips);
+	  var tooltipResult = createTooltipArray.createArray(this.json); //tooltipResult =>tooltips array
+	  console.log(tooltipResult);
+	 
 
+	  //draw horizontal and vertical Axis
+	   var drawAxis = new drawAxis_file();
+	   drawAxis.draw_XY_Axis();
+	   
+	  
+	   //draw the X value texts, draw text values in horizont axis!!!!!!
+	   var draw_X_text = new drawXValues_file();
+	   draw_X_text.draw_X_value_text(tooltipResult); //the only way to pass var tooltips to this module //tooltipResult =>tooltips array
+	   
+	   //draw the Y value texts, draw text values invertical axis!!!!!!
+	   var draw_Y_text = new drawYValues_vertical_file();
+	   draw_Y_text.draw_Y_value_text(); //the only way to pass var tooltips to this module
+	   
+	   // Draw the CHART graph Lines
+	    var draw_chartLines = new drawChartLines_file();
+	    draw_chartLines.draw_lines(this.json); 
+		
+		
+		//draw hoverable dots, if u hover over them-> tooltip will appear
+	    var draw_dots = new addDots_file();
+	    draw_dots.addHoverableDots(this.json);
+		
+		//showTooltip_onMouseOver
+	    var showTooltips = new showTooltips_file();
+	    showTooltips.dispalyTooltips(tooltipResult); //tooltipResult =>tooltips array
+		
+		
+		// Switch day/night mode
+	    var switchMode = new switchNightDay_file();
+	    switchMode.switchMode(); 
+	  
+	  // **                                                                                  **
+      // **************************************************************************************
+      // **************************************************************************************
+	  
    } //end this.CreateChart
    
    

@@ -35,7 +35,16 @@ add to packagist.json
 
 
 
-
+=======================================================
+COMMON JS EXPORTS:
+1. To export a var from module A to module B, do:
+  a.)in module A, {exports.varName;}. Since u exports {varName}, u can no longer use it in module A. 
+      If us till need it in Module A, u can export another copied var {exports.varName2 = varName}
+  b.)in module B, {var core_var = require('./moduleA.js');}, and now in B u can use it like this{core_var.varName;}
+  
+2. To export a function from module A to module B, do:
+  a.)in module A, as usual {module.exports = getMaxY;}
+  b.)in module B, {new getMaxY_file().functionName();} or { var getMaxY = new getMaxY_file();} and use like {getMaxY.functionName();}
 
 
 

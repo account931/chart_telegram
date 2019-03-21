@@ -9,9 +9,15 @@ function creates_tooltip_array_from_json(){
 	  var getXPixel_file2 = new getXPixel_file(); //Module
 	  var getYPixel_file2 = new getYPixel_file(); //Module
 	  
-	  
+	  //var cv; var g = "ggg";
+	  //exports.cv = g ;
+	  //alert(g);
       //define tooltips for each json point //adding to array tooltips
+	  
       var tooltips = [];
+	  //var tooltips4;
+	  //exports.tooltips4 = [4,4]; //tooltips;
+	  
 
       //it works, creates an array with objects for tooltips, creates in format [{x:$, y:$, rXr;$, tip:$}, {x:$, y:$, rXr;$, tip:$}]
       //(90% copied from variant for 1 chart, just added additional inner for loop {for (var j = 0; j < json[i].columns.length; j++)}
@@ -38,7 +44,8 @@ function creates_tooltip_array_from_json(){
 			 
 	      }
       }
-      console.log(tooltips);
+      //console.log(tooltips);
+	  return tooltips;
    }
 }
 
