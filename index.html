@@ -17,6 +17,7 @@
 
   <!-- CSS STYLES -->
   <link href="css/my_css/mycss.css" rel="stylesheet"><!--my own css-->
+  <link href="css/my_css/slidePanel.css" rel="stylesheet"><!-- slide panel css-->
 
   
   <!--Favicon-->
@@ -42,6 +43,75 @@
 
     <div class="col-sm-12 chart-main">
         <h4 class="textShadow">Chart Telegram</h4>
+		
+		
+		<!-------------------------------------------------------------- Slide  Panel   -------------------->
+		<!-- hidden slidepanel -->
+		<div id="mySidepanel" class="sidepanel"> 
+		    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+			
+		  <div class="seekbar-container">	
+		  
+                <h2> Chart 1<h2>
+                <input type="range" min="1" max="250" value="10" class="slider" id="first_chart0">
+                <p>Value: <span id="first_demo0"></span></p>
+			
+                <input type="range" min="1" max="250" value="10" class="slider" id="first_chart1">
+                <p>Value: <span id="first_demo1"></span></p>
+           
+			
+                <input type="range" min="1" max="250" value="10" class="slider2" id="first_chart2">
+                <p>Value: <span id="first_demo2"></span></p>
+				
+				<input type="range" min="1" max="250" value="10" class="slider2" id="first_chart3">
+                <p>Value: <span id="first_demo3"></span></p>
+				
+				<input type="range" min="1" max="250" value="10" class="slider2" id="first_chart4">
+                <p>Value: <span id="first_demo4"></span></p>
+			
+			
+			
+			    <br>
+			    <h2> Chart 2<h2>
+                <input type="range" min="1" max="250" value="10" class="slider2" id="second_chart0">
+                <p>Value: <span id="second_demo0"></span></p>
+			
+                <input type="range" min="1" max="250" value="10" class="slider2" id="second_chart1">
+                <p>Value: <span id="second_demo1"></span></p>
+			
+                <input type="range" min="1" max="250" value="10" class="slider" id="second_chart2">
+                <p>Value: <span id="second_demo2"></span></p>
+				
+				<input type="range" min="1" max="250" value="10" class="slider" id="second_chart3">
+                <p>Value: <span id="second_demo3"></span></p>
+				
+				<input type="range" min="1" max="250" value="10" class="slider" id="second_chart4">
+                <p>Value: <span id="second_demo4"></span></p>
+            
+		</div><!-- class="seekbar-container">	-->
+			
+           <button class="btnDraw" id="drawChartonClick">Draw chart</button> <!-- draw custom chart -->
+        </div><!-- end class="sidepanel"> -->
+        <!-- END hidden slidepanel -->
+	  
+		<button class="openbtn" onclick="openNav()">☰ Configure</button> <!-- Slide panel button to show/hide -->
+		
+		
+		<!-- Slide panel JS script(not used as a module, slidePanel does not reuire any other JS code) -->
+		<script>
+        function openNav() {
+            document.getElementById("mySidepanel").style.width = "80%";
+        }
+
+       function closeNav() {
+           document.getElementById("mySidepanel").style.width = "0";
+       }
+       </script>
+       <!--------------------------------------------------------------- END  Slide Panel --------------------->
+	   
+	   
+	   
+	   
         <hr>
       
 	  

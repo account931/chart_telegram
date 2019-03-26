@@ -1,3 +1,5 @@
+//it draws chart lines 
+
 var core_var = require('./core.js'); //IMPORT VARIABLES {c, xPadding,yPadding} from core.js
 var getMaxY_file = require('./getMaxY.js');
 //var convertDate_file = require('./convertDateStamp.js');
@@ -5,7 +7,7 @@ var getYPixel_file = require('./getYPixel.js'); // Return the Y pixel for a grap
 var getXPixel_file = require('./getXPixel.js'); // Return the X pixel for a graph point->function getXPixel(){
 
 
-// Draw the Y value texts, text in vertical axis
+// Draw t
 function draw_chartLines(){
 	
 
@@ -68,6 +70,9 @@ function draw_chartLines(){
     c.font = "20px Georgia";
     c.fillText("Followers", 130, 20);
   }    
+  
+  
+
 }
 
 module.exports = draw_chartLines;

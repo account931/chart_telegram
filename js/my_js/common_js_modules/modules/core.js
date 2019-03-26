@@ -1,3 +1,5 @@
+//Contains all logic for drawing the whole chart(lines, dots, axis, tooltips). Runs on load based on predifined here json[] array.
+
 var toolTip_file = require('./creates_tooltip_array_from_json.js'); // define tooltips for each json point //adding to array tooltips
 var drawAxis_file = require('./draw_Vert_Horiz_Axis.js');  //draw horizontal and vertical Axis
 var drawXValues_file = require('./draw_X_values_text.js');  //Draw the X value texts, draw text values in horizont axis!!!!!!
@@ -7,8 +9,14 @@ var addDots_file = require('./addHoverable_Dots.js');  //draw hoverable dots, if
 var showTooltips_file = require('./showTooltip_onMouseOver.js');  //show Tooltips onMouseOver
 var switchNightDay_file = require('./switchDayNightMode.js');  //switchDayNightMode
 
+var seekBar_file = require('./Seek_bar_controls/seek_bar_ctr.js');  //display seekbar values in hidden SlidePanel 
+var drawChart_onClick_file = require('./core_onClick.js');//draw a chart onClick with custom seekbar values
+
 
 function core(){
+	
+	
+	
   
   //Json data array
   this.json =	[
@@ -111,6 +119,16 @@ function core(){
 		// Switch day/night mode
 	    var switchMode = new switchNightDay_file();
 	    switchMode.switchMode(); 
+		
+		
+		//display seekbar values in hidden SlidePanel
+	    var seekBar_control = new seekBar_file();
+	    seekBar_control.getSBar_values(); 
+		
+		
+		//draw a chart onClick with custom seekbar values
+	    var drawChartonClickk = new drawChart_onClick_file();
+	    drawChartonClickk.createChart_onClickkk(); 
 	  
 	  // **                                                                                  **
       // **************************************************************************************

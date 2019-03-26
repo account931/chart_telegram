@@ -11,10 +11,10 @@ function draw_Y_values_vertical(){
 
 
   this.draw_Y_value_text = function(tooltips){ 
+  
       //start import Vars from core.js
       var c = core_var.c; //IMPORT VAR {c} fom core.js
 	  var xPadding = core_var.xPadding; //IMPORT VAR {xPAdding} from core.js
-	  
 	  //END  import Vars from core.js
 	  
 	
