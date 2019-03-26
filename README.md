@@ -1,7 +1,12 @@
-# Application to create manually charts.
+# Application to create charts manually.
 
 How it works:
 1. Main (and the only) entry JS script is js/my_js/dist/js/bundle_js.js
+2. App works on CommonJs modules. If u wish to see more simple version (in one file), view js\my_js/raw.js(for multiple lines chart) 
+   or raw_RESERVED_for_1_chart_only.js(version for 1 line chart). 
+   This two files are not engaged and not connected in index.html, they are just for viewing the simple variant.
+   
+  
 
 
 
