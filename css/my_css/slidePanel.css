@@ -10,10 +10,16 @@
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 10px;
-  height:1200px;
-  overflow-y: scroll;
- 
+  height:900px;
+  
+  /* Scroll mega error Fix */
+  max-height:900px;
+  overflow: auto !important;
+  border: 1px solid white;
+  padding-bottom: 370px; /* Core Scroll Fix */
 }
+
+
 
 .sidepanel a {
   padding: 8px 8px 8px 32px;
@@ -36,7 +42,7 @@
 }
 
 .openbtn {
-  font-size: 20px;
+  font-size: 14px;
   cursor: pointer;
   background-color: #111;
   color: white;
