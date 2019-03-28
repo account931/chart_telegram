@@ -1,4 +1,4 @@
-# Application to create charts manually.
+# Application to create charts manually. Designed to draw 2 charts on 1 canvas, but can be redesigned for unlimited charts on a one canvas.
 
 How it works:
 1. Main (and the only) entry JS script is js/my_js/dist/js/bundle_js.js
@@ -12,6 +12,7 @@ How it works:
 
 
 ========================================================
+
 Mega Errors(fixed):
 1.LineTo() method used inside for(var i = 0; i < var.length){ setTimeout(), 1000); caused wrong iteration counting(it jumped at once to last iteration). 
 Fixed by (shooter army) example.
@@ -25,6 +26,7 @@ Fixed by setting the start position(c.moveTo) inside for loop in the very first 
 
 
 =========================================================
+
 BROWSERIFY, for more details see {account931/git-browserify-yii_commands_manuals/npm_browserify_commands.txt}
 CLI-> browserify js/my_js/common_js_modules/main.js > js/my_js/dist/js/bundle_js.js -d
 CLI-> npm run watch-js    =watch changes without rebuild
