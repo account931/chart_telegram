@@ -1,3 +1,5 @@
+//NOT USED
+//the whole file for 2 & more lines chart. it was splitted in multiple Common Js Files
 
 $(function(){
 	
